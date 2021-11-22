@@ -1,8 +1,19 @@
 const {nanoid} = require('nanoid')
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 
 app.use(express.json())
+
+morgan.token('post-body', (req, res) => {
+  return req.method === 'POST' ? JSON.stringify(req.body) : null
+})
+
+app.use(
+  morgan(
+    ':method :url :status :res[content-length] - :response-time ms :post-body'
+  )
+)
 
 let persons = [
   {
@@ -53,7 +64,6 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
-  console.log(id)
   persons = persons.filter((person) => String(person.id) !== id)
 
   response.status(204).end()
