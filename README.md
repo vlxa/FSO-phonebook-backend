@@ -1,2 +1,5 @@
 # FSO-phonebook-backend
-FullStackOpen.com phonebook backend application exercises
+
+<fso-phonebook-exercise.herokuapp.com>
+
+Phonebook exercise for <fullstackopen.com>

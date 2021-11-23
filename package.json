@@ -9,7 +9,7 @@
     "build:ui": "rm -rf build && cd ../full-stack-open/phonebook && npm run build -prod && cp -r build ../FSO-phonebook-backend",
     "deploy": "git push heroku main",
     "deploy:full": "npm build:ui && gii add . && git commit -m uibuild &&git push && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "npx heroku logs --tail"
   },
   "repository": {
     "type": "git",
