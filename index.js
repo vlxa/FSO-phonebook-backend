@@ -9,7 +9,9 @@ app.use(cors())
 app.use(express.static('build'))
 
 morgan.token('post-body', (req, res) => {
-  return req.method === 'POST' ? JSON.stringify(req.body) : null
+  return req.method === 'POST' || 'GET' || 'PUT'
+    ? JSON.stringify(req.body)
+    : null
 })
 
 app.use(
