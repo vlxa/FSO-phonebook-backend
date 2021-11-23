@@ -4,9 +4,12 @@
   "description": "FullStackOpen.com exercises - backend for phonebook app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build:ui": "rm -rf build && cd ../full-stack-open/phonebook && npm run build -prod && cp -r build ../FSO-phonebook-backend",
+    "deploy": "git push heroku main",
+    "deploy:full": "npm build:ui && gii add . && git commit -m uibuild &&git push && npm run deploy",
+    "logs:prod": "heroku logs --tail"
   },
   "repository": {
     "type": "git",
