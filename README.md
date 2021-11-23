@@ -1,5 +1,5 @@
 # FSO-phonebook-backend
 
-<fso-phonebook-exercise.herokuapp.com>
+<https://fso-phonebook-exercise.herokuapp.com>
 
-Phonebook exercise for <fullstackopen.com>
+Phonebook exercise for <https://fullstackopen.com>
