@@ -19,18 +19,24 @@ app.use(
   )
 )
 
-app.get('/api/persons', (request, response) => {
-  Person.find({}).then((persons) => {
-    response.json(persons)
-  })
+app.get('/api/persons', (request, response, next) => {
+  Person.find({})
+    .then((persons) => {
+      response.json(persons)
+    })
+    .catch((error) => next(error))
 })
 
-app.get('/info', (request, response) => {
-  const date = new Date()
-  const numEntries = persons.length
-  const message = `<h3>Phonebook has info for ${numEntries} people</h3><p>${date}</p>`
+app.get('/info', (request, response, next) => {
+  Person.find({})
+    .then((persons) => {
+      const date = new Date()
+      const numEntries = persons.length
+      const message = `<h3>Phonebook has info for ${numEntries} people</h3><p>${date}</p>`
 
-  response.send(message)
+      response.send(message)
+    })
+    .catch((error) => next(error))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -53,7 +59,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch((error) => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (body.name === '' || body.number === '') {
@@ -69,7 +75,10 @@ app.post('/api/persons', (request, response) => {
     number: body.number,
   })
 
-  person.save().then((savedPerson) => response.json(savedPerson))
+  person
+    .save()
+    .then((savedPerson) => response.json(savedPerson))
+    .catch((error) => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -80,7 +89,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     number: body.number,
   }
 
-  Person.findByIdAndUpdate(request.params.id, note, {new: true})
+  Person.findByIdAndUpdate(request.params.id, person, {new: true})
     .then((updatedPerson) => response.json(updatedPerson))
     .catch((error) => next(error))
 })
