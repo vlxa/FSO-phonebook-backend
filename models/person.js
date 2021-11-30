@@ -6,10 +6,10 @@ console.log('connecting to', url)
 
 mongoose
   .connect(url)
-  .then((result) => {
+  .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message)
   })
 
@@ -26,4 +26,4 @@ personSchema.set('toJSON', {
   },
 })
 
-module.exports = mongoose.model('Note', personSchema)
+module.exports = mongoose.model('Person', personSchema)
