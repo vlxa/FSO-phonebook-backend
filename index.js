@@ -62,14 +62,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
-  if (body.name === '' || body.number === '') {
-    return response.status(400).json({error: 'content missing'})
-  }
-
-  //if (persons.find(person => person.name === body.name)) {
-  //  return response.status(400).json({ error: 'name must be unique' })
-  //}
-
   const person = new Person({
     name: body.name,
     number: body.number,
@@ -77,7 +69,8 @@ app.post('/api/persons', (request, response, next) => {
 
   person
     .save()
-    .then((savedPerson) => response.json(savedPerson))
+    .then((savedPerson) => savedPerson.toJSON())
+    .then((savedFormattedPerson) => response.send(savedFormattedPerson))
     .catch((error) => next(error))
 })
 
