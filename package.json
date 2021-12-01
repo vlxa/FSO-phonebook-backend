@@ -8,7 +8,7 @@
     "start": "node index.js",
     "build:ui": "rm -rf build && cd ../full-stack-open/phonebook && npm run build -prod && cp -r build ../FSO-phonebook-backend",
     "deploy": "git push heroku main",
-    "deploy:full": "npm build:ui && gii add . && git commit -m uibuild &&git push && npm run deploy",
+    "deploy:full": "npm build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "npx heroku logs --tail"
   },
   "repository": {
@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.13",
-    "morgan": "^1.10.0",
-    "nanoid": "^3.1.30"
+    "morgan": "^1.10.0"
   }
 }
