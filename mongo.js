@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const mongooseUniqueValidator = require('mongoose-unique-validator')
+const uniqueValidator = require('mongoose-unique-validator')
+const person = require('./models/person')
 
 if (process.argv.length < 3) {
   console.log(
@@ -18,9 +21,18 @@ const url = `mongodb+srv://vlxa:${password}@cluster0.n4wrf.mongodb.net/note-app?
 mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: Number,
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  number: {
+    type: Number,
+    minLength: 7,
+  },
 })
+
+personSchema.plugin(mongooseUniqueValidator)
 
 const Person = mongoose.model('Person', personSchema)
 
