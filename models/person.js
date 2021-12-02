@@ -3,15 +3,15 @@ const mongooseUniqueValidator = require('mongoose-unique-validator')
 
 const url = process.env.MONGODB_URI
 
-console.log('connecting to', url)
+console.log('connecting to', url) // eslint-disable-line no-console
 
 mongoose
   .connect(url)
-  .then((result) => {
-    console.log('connected to MongoDB')
+  .then(() => {
+    console.log('connected to MongoDB') // eslint-disable-line no-console
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
+    console.log('error connecting to MongoDB:', error.message) // eslint-disable-line no-console
   })
 
 const personSchema = new mongoose.Schema({
@@ -28,7 +28,8 @@ const personSchema = new mongoose.Schema({
 })
 
 personSchema.plugin(mongooseUniqueValidator)
-
+/* eslint no-underscore-dangle: "off" */
+/* eslint no-param-reassign: "off" */
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
